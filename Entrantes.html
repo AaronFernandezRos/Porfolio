@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>FFOOD</title>
-    <script>
-        // Función para abrir el modal de inicio de sesión
+    <title>ENTRANTES - FFOOD</title>
+    <script> //ABRIR MODAL
+    // Función para abrir el modal de inicio de sesión
     function openLoginModal() {
         var modal = document.getElementById('loginModal');
         modal.style.display = 'block';
@@ -62,9 +62,83 @@
             }
         });
     });
+ 
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousel = document.querySelector('.carousel');
+        let isHovered = false;
 
-    // Obtener parámetro de la URL
-    function getQueryStringParameter(name) {
+        // Pausar la animación cuando el cursor entra en el carrusel
+        carousel.addEventListener('mouseenter', function() {
+            isHovered = true;
+        });
+
+        // Reanudar la animación cuando el cursor sale del carrusel
+        carousel.addEventListener('mouseleave', function() {
+            isHovered = false;
+        });
+
+        // Función para animar el carrusel
+        function animateCarousel() {
+            if (!isHovered) {
+                carousel.style.animationPlayState = 'running';
+            } else {
+                carousel.style.animationPlayState = 'paused';
+            }
+        }
+
+        // Llamar a la función de animación del carrusel
+        setInterval(animateCarousel, 100);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.carousel');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    let isHovered = false;
+
+    // Pausar la animación cuando el cursor entra en el carrusel
+    carousel.addEventListener('mouseenter', function() {
+        isHovered = true;
+    });
+
+    // Reanudar la animación cuando el cursor sale del carrusel
+    carousel.addEventListener('mouseleave', function() {
+        isHovered = false;
+    });
+
+    // Función para animar el carrusel
+    function animateCarousel() {
+        if (!isHovered) {
+            carousel.style.animationPlayState = 'running';
+        } else {
+            carousel.style.animationPlayState = 'paused';
+        }
+    }
+
+    // Función para desplazar el carrusel hacia atrás
+    function moveCarouselBackward() {
+        const firstImage = carousel.firstElementChild;
+        carousel.removeChild(firstImage);
+        carousel.appendChild(firstImage);
+    }
+
+    // Función para desplazar el carrusel hacia adelante
+    function moveCarouselForward() {
+        const lastImage = carousel.lastElementChild;
+        carousel.removeChild(lastImage);
+        carousel.insertBefore(lastImage, carousel.firstElementChild);
+    }
+
+    // Agregar eventos de clic a los botones "prev" y "next"
+    prevButton.addEventListener('click', moveCarouselBackward);
+    nextButton.addEventListener('click', moveCarouselForward);
+
+    // Llamar a la función de animación del carrusel
+    setInterval(animateCarousel, 100);
+});
+
+// Obtener parámetro de la URL
+function getQueryStringParameter(name) {
             name = name.replace(/[\[\]]/g, "\\$&");
             let url = window.location.href;
             let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
@@ -147,7 +221,8 @@
     });
 });
 
-   // PRODUCTOS Y CARRITO //
+
+// PRODUCTOS Y CARRITO //
 let carrito = {};
 
 function cambiarCantidad(producto, cantidad) {
@@ -210,11 +285,11 @@ function mostrarModalCarrito() {
         	const item = carrito[producto];
         	const itemTotal = item.cantidad * item.precio;
         	total += itemTotal;
-        	contenidoCarrito.innerHTML += `<p>${producto} - Cantidad: ${item.cantidad} - Precio: ${itemTotal.toFixed(2)}€
+        	contenidoCarrito.innerHTML += `<p>${producto} - Cantidad: ${item.cantidad} - PRECIO: ${itemTotal.toFixed(2)}€
             	<button class="boton-eliminar" onclick="eliminarProducto('${producto}')">Eliminar</button></p>`;
     	}
 	}
-	document.getElementById('precioTotal').innerText = `Total: ${total.toFixed(2)}€`;
+	document.getElementById('precioTotal').innerText = `TOTAL: ${total.toFixed(2)}€`;
 	document.getElementById('modalCarrito').style.display = 'block';
 }
 
@@ -294,18 +369,17 @@ window.onload = function() {
     font-size: 1.2rem
 }
 
-       /* ESTILOS FUENTE */
-       @font-face {
+/* ESTILOS FUENTE */
+@font-face {
     font-family:Insanibu;
     src: url(fonts/Insanibu.ttf);
 }
 
-@font-face {
+    @font-face {
     font-family:Montserrat;
     src: url(fonts/Montserrat-VariableFont_wght.ttf);
 }
-
-       /* Estilos generales */
+/* Estilos generales */
        * {
     margin: 0;
     padding: 0;
@@ -322,9 +396,8 @@ body {
 }
 
 h1 {
-    color: rgba(255,204,0); /* Cambia el color del texto de h1 a amarillo */
+    color: yellow; /* Cambia el color del texto de h1 a amarillo */
     text-align: center; /* Centra el texto de h1 */
-    margin-top: 50px;
 }
 
 /* Contenedor principal */
@@ -441,6 +514,10 @@ h1 {
     margin-left: -10px; /* Aplica un margen izquierdo de -10px */
 }
 
+#cambiar-color{
+    color:rgba(255,204,0)
+}
+
 /* Segundo header */
 .secondary-header {
     background-image: url('img fondo,header e inicio/fuego.gif'); /* Establece una imagen de fondo animada */
@@ -454,6 +531,7 @@ h1 {
     align-items: center; /* Centra los elementos verticalmente */
     font-size: 23px; /* Establece el tamaño de fuente a 23px */
     font-family:Insanibu;
+
 }
 
 .secondary-header .logo {
@@ -495,7 +573,7 @@ h1 {
 /* Color para hiperenlaces */
 .primary-header a:hover,
 .secondary-header a:hover {
-    color: yellow; /* Cambia el color del texto a amarillo cuando se pasa el ratón por encima */
+    color: rgba(255,204,0) /* Cambia el color del texto a amarillo cuando se pasa el ratón por encima */
 }
 
 
@@ -541,13 +619,13 @@ h1 {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 2; /* Asegura que el modal esté en una capa superior */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: rgba(51, 51, 51, 0.6);
+    background-color: rgba(51, 51, 51,0.6);
 }
 
 .modal-content {
@@ -575,8 +653,32 @@ h1 {
     border-radius: 10px; /* Bordes redondeados */
 }
 
-.centrar h2{
+/* Estilo para el botón de inicio de sesión*/
+.btn {
+    background-color: rgb(232, 188, 15); /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #cc9900;
+}
+
+/* Estilo para centrar el botón */
+.btn-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente si el contenedor tiene altura definida */
+}
+
+.modal-h2{
     text-align: center;
+    margin-bottom: 10px;
 }
 
 /* Estilo para el botón de cierre */
@@ -653,7 +755,7 @@ input[type="checkbox"] {
 
 /* Estilo para el botón de inicio de sesión*/
 .btn {
-    background-color: rgb(232, 188, 15); /* Color de fondo */
+    background-color: rgba(255,204,0); /* Color de fondo */
     color: white; /* Color del texto */
     padding: 15px 20px;
     border: none;
@@ -674,72 +776,125 @@ input[type="checkbox"] {
     align-items: center; /* Centra verticalmente si el contenedor tiene altura definida */
 }
 
-.modal-h2{
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-/* RESTAURANTES */
-.nuestros {
-    color: rgba(255,204,0)
-    
-}
- 
-/*GALERÍA DE IMÁGENES */   
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 75%;
-    margin-inline: auto;
-    margin-top: 30px;
-}
-
-.image-gallery img {
-    width: 100%;
-    object-fit: cover;
-    transition: transform 350ms ease, opacity 350ms linear;
-    filter: grayscale(15%);
-}
-
-.image-gallery:hover img:not(:hover) {
-    transform: scale(0.8);
-    opacity: 0.6;
-}
-
-.image-container {
+/*Estilos del carrusel */
+.carousel-container {
+    width: 60%; /* Puedes ajustar este valor según sea necesario */
+    overflow: hidden; /* Asegúrate de que el overflow esté oculto */
     position: relative;
-    display: inline-block;
+    margin: 20px auto; /* Centra horizontalmente el carrusel */
+    display: flex;
+    justify-content: center; /* Centra el contenido dentro del contenedor */
+    align-items: center; /* Alinea verticalmente en el centro */
 }
 
-.hover-text {
+.carousel {
+    display: flex;
+    animation: scroll 10s linear infinite;
+    gap: 50px; /* Añade espacio entre las imágenes */
+}
+
+.carousel img {
+    flex-shrink: 0;
+    height: 75px; /* Ajusta la altura según el ancho */
+    width: 75px; /* Ajusta el ancho de cada imagen a un tamaño más pequeño */
+}
+
+.prev, .next {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
+    transform: translateY(-50%);
+    background-color: rgba(255,204,0);
+    color: black;
+    border: none;
     padding: 10px;
-    border-radius: 5px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    text-decoration: none;
+    cursor: pointer;
+    z-index: 1; /* Asegura que los botones estén detrás del modal */
+    font-size: large;
 }
 
-.image-container:hover .hover-text {
-    opacity: 1;
+.prev {
+    left: 15px; /* Ajusta este valor para estirar más hacia la izquierda */
 }
 
-.image-container:hover img {
-    transform: scale(1);
-    opacity: 1;
+.next {
+    right: 15px; /* Ajusta este valor para estirar más hacia la derecha */
 }
 
-.hover-text:hover {
-    color: rgba(255,204,0)
-}
+ /* Animación de desplazamiento del carrusel */
+ @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-20%); /* Desplazamiento completo hacia la izquierda */
+            }
+        }
 
-/* Ventana emergente del carrito */
-.ventana-emergente {
+/* Estilos para los productos */
+.productos-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px; /* Ajuste del margen superior */
+    }
+    .producto {
+        transition: transform 0.3s;
+        margin: 25px;
+        padding: 7px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        background-color: rgba(51,51,51,0.8);
+        text-align: center;
+        width: 250px; /* Ancho del producto */
+    }
+
+    .producto img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .producto p {
+        font-size: 20px;
+        margin-top: 10px;
+        text-align: center;
+        color:rgba(255,204,0);
+    }
+    .producto:hover {
+        transform: scale(1.1);
+    }
+
+    .cantidad {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px; /* Espacio entre botones y cantidad */
+        margin-top: 10px;
+        color: rgba(255,204,0);
+    }
+    
+    .cantidad button {
+        background-color: #ffcc00;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+    .cantidad span {
+        font-size: 16px;
+    }
+    .añadir {
+        background-color: #ffcc00;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        
+    }
+    
+    /* Ventana emergente del carrito */
+    .ventana-emergente {
         display: none; /* Oculto por defecto */
         position: fixed;
         z-index: 1000;
@@ -793,10 +948,9 @@ input[type="checkbox"] {
     .boton-eliminar:hover{
         background-color:#cc9900
     }
-   
 
-    /* Ventana emergente de confirmación */
-    .ventana-confirmacion {
+     /* Ventana emergente de confirmación */
+     .ventana-confirmacion {
         display: none; /* Oculto por defecto */
         position: fixed;
         z-index: 1001;
@@ -857,7 +1011,6 @@ footer {
     padding: 20px 0;
     text-align: center;
     margin-top: auto; /* Hace que el footer se quede pegado en la parte inferior */
- 
 }
 
 .footer-container {
@@ -901,8 +1054,9 @@ footer {
 </style>
 </head>
 
-<body>   
-<!-- Modal de mensaje de error -->
+<body>
+
+    <!-- Modal de mensaje de error -->
 <div id="errorModal" class="modal">
     <div class="modal-content">
         <p id="errorMensaje"></p>
@@ -926,18 +1080,18 @@ footer {
         <form>
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" autocomplete="email" required="">
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <div class="form-group">
+                <a href="#" id="openForgotPasswordModal">¿Olvidaste tu contraseña?</a>
+            </div>
             <div class="form-group checkbox-group">
                 <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Recordarme</label>
-            </div>
-            <div class="form-group">
-                <a href="#" id="openForgotPasswordModal">¿Olvidaste tu contraseña?</a>
             </div>
             <div class="btn-container">
                 <button id="btnLogin" class="btn" onclick="submitLoginForm()">Iniciar sesión</button> 
@@ -993,15 +1147,12 @@ footer {
                         </ul>
                     </ul>
                 </nav>
-                
                 <div class="icono-carrito" onclick="mostrarModalCarrito()">
                     <a href="#"><img src="img fondo,header e inicio/icono carrito.png" alt="Carrito de Compras"></a>
                     <!-- Contador de artículos en el carrito -->
                     <div id="contador-carrito" class="count-carrito">0</div>
                 </div>
-                <!-- Botón para abrir el modal de inicio de sesión -->
                 <a href="#" class="icono-usuario" onclick="openLoginModal()"><img src="img fondo,header e inicio/icono usuario.png" alt="Usuario" style="width: 50px; height: auto;"></a>
-
             </header>
             <!-- Segundo header -->
             <header class="secondary-header">
@@ -1014,7 +1165,7 @@ footer {
                             <a href="#"><i class="fa-solid fa-utensils"></i> Comidas</a>
                             <!-- Submenú de comidas -->
                             <ul class="submenu">
-                                <a href="Entrantes.html">Entrantes</a>
+                                <a href="Entrantes.html" id="cambiar-color">Entrantes</a>
                                 <a href="Pizzas.html">Pizzas</a>
                                 <a href="Hamburguesas.html">Hamburguesas</a>
                                 <a href="Kebab.html">Kebab</a>
@@ -1027,58 +1178,131 @@ footer {
                     </ul>
                 </nav>
             </header>
+        
+    </div>
+    <!-- Carrusel de imágenes -->
+<div class="carousel-container">
+    <button class="prev">&#10094;</button>
+    <div class="carousel">
+        <a href="Postres.html"><img src="imagenes postres/flan.png" alt="Foto Flan"></a>
+        <a href="Menus.html"><img src="imagenes menus/menu4.png" alt="Foto Menu 4"></a>
+        <a href="Pizzas.html"><img src="imagenes pizzas/pizza peperoni.png" alt="Foto Pizza Peperoni"></a>
+        <a href="Hamburguesas.html"><img src="imagenes hamburguesas/hamburguesa pollo.png" alt="Foto Hamburguesa Pollo"></a>
+        <a href="Kebab.html"><img src="imagenes kebab/falafel.png" alt="Foto Kebab Falafel"></a>
+        <a href="Ofertas.html"><img src="Imagenes ofertas/Pizzhamuburguesas.png" alt="Foto combo pizza y hamburguesa"></a>
+        <a href="Pizzas.html"><img src="imagenes pizzas/4 quesos.png" alt="Foto Pizza 4 Quesos"></a>
+        <a href="Postres.html"><img src="imagenes postres/tarta queso.png" alt="Foto Tarta de Queso"></a>
+        <a href="Ofertas.html"><img src="Imagenes ofertas/Pizza Mania.png" alt="Foto Pizza Mania"></a>
+        <a href="Ofertas.html"><img src="Imagenes ofertas/Golosin.png" alt="Foto OFertas de postres"></a>
+        <a href="Hamburguesas.html"><img src="imagenes hamburguesas/hamburguesa doble.png" alt="Foto Hamburguesa Doble"></a>
+        <a href="Kebab.html"><img src="imagenes kebab/plato kebab.png" alt="Foto Plato Kebab"></a>
+        <a href="Hamburguesas.html"><img src="imagenes hamburguesas/hamburguesa bacon.png" alt="Foto Hamburguesa Bacon"></a>
+        <a href="Pizzas.html"><img src="imagenes pizzas/barbacoa.png" alt="Foto Pizza Barbacoa"></a>
+        <a href="Menus.html"><img src="imagenes menus/menu3.png" alt="Foto Menu 3"></a>
+        <a href="Postres.html"><img src="imagenes postres/helado chocolate.png" alt="Foto Helado de Chocolate"></a>
+        <a href="Menus.html"><img src="imagenes menus/menu1.png" alt="Foto Menu 1"></a>
+        <a href="Kebab.html"><img src="imagenes kebab/lahmacun.png" alt="Foto Lahmacun"></a>
         </div>
+    <button class="next">&#10095;</button>
+</div> 
     </div>
 
-    
-    <!-- RESTAURANTES -->
-    <h1>NUESTROS RESTAURANTES</h1>
-
-    <!-- GALERÍA IMÁGENES    -->
-    <div class="image-gallery">
-        <div class="image-container">
-            <img src="imagen index/restaurante3.jpeg.jpeg" alt="Foto Restaurante Barcelona">
-            <a href="https://maps.app.goo.gl/ki7kY9k6a6qqDCi29" target="_blank" class="hover-text">Ir Restaurante Barcelona Rambla</a>
+<!-- Contenedor de productos -->
+<div class="productos-container">
+    <!-- Primera fila de productos -->
+    <div class="producto">
+        <img src="imagenes entrantes/nachos.png" alt="nachos">
+        <p style="font-weight: bold;">Nachos</p>
+        <p>Nachos crujientes cubiertos con abundante queso derretido 
+            y carne sazonada, todo coronado con frescas guarniciones. </p>
+        <p>5.99€</p>
+        <div class="cantidad">
+            <button class="menos" onclick="cambiarCantidad('NACHOS', -1)"><i class="fas fa-minus"></i></button>
+            <span id="cantidad-NACHOS">0</span>
+            <button class="mas" onclick="cambiarCantidad('NACHOS', 1)"><i class="fas fa-plus"></i></button>
         </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante5.jpeg" alt="Foto Restaurante Manga">
-            <a href="https://maps.app.goo.gl/ZCDUm3QRSN4DV9c57" target="_blank" class="hover-text">Ir Restaurante La Manga</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante6.jpeg" alt="Foto Restaurante Valencia">
-            <a href="https://maps.app.goo.gl/WrXhyyFiRs9NNj3a6" target="_blank" class="hover-text">Ir Restaurante Valencia</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante7.jpeg" alt="Foto Restaurante Barcelona">
-            <a href="https://maps.app.goo.gl/XNKw7sQuH5fHVYMU9" target="_blank" class="hover-text">Ir Restaurante Sagrada Familia</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante9.jpeg" alt="Foto Restaurante Bilbao">
-            <a href="https://maps.app.goo.gl/YoRRiF1qXt1wsMjE8" target="_blank" class="hover-text">Ir Restaurante Bilbao</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante11.jpeg" alt="Foto Restaurante Nueva York">
-            <a href="https://maps.app.goo.gl/i7BFQcKrb7B9vVPp8" target="_blank" class="hover-text">Ir Restaurante Central Park</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante12.jpeg" alt="Foto Restaurante Tokyo">
-            <a href="https://maps.app.goo.gl/c59FNhSoy3bJnuiS9" target="_blank" class="hover-text">Ir Restaurante Tokyo</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante14.jpeg" alt="Foto Restaurante Europa">
-            <a href="https://www.google.es/maps/space/europa/@27.4314532,151.4288514,11343686m/data=!3m1!1e3?hl=es&entry=ttu" target="_blank" class="hover-text">Ir Restaurante Europa</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante15.jpeg" alt="Foto Restaurante Calisto">
-            <a href="https://www.google.es/maps/space/callisto/@-8.9766055,117.6494786,13503295m/data=!3m1!1e3?hl=es&entry=ttu" target="_blank" class="hover-text">Ir Restaurante Calisto</a>
-        </div>  
+        <button class="añadir" onclick="añadirProducto('NACHOS', 5.99)">AÑADIR</button>
     </div>
 
-    <!-- Ventana emergente del carrito -->
+    <div class="producto">
+        <img src="imagenes entrantes/patatas bacon.png" alt="patatas bacon">
+        <p style="font-weight: bold;">Patatas Bacon</p>
+        <p>Patatas doradas y crujientes, cubiertas con trozos de bacon crujiente y una generosa 
+            cantidad de queso derretido </p>
+        <p>2.50€</p>
+        <div class="cantidad">
+            <button class="menos" onclick="cambiarCantidad('PATATAS BACON', -1)"><i class="fas fa-minus"></i></button>
+            <span id="cantidad-PATATAS BACON">0</span>
+            <button class="mas" onclick="cambiarCantidad('PATATAS BACON', 1)"><i class="fas fa-plus"></i></button>
+        </div>
+        <button class="añadir" onclick="añadirProducto('PATATAS BACON', 2.50)">AÑADIR</button>
+    </div>
+
+    <div class="producto">
+        <img src="imagenes entrantes/tequeños.png" alt="tequeños">
+        <p style="font-weight: bold;">Tequeños</p>
+        <p>Palitos con masa de harina rellenos de queso blanco suave, 
+            fritos a la perfección hasta dorarse y servidos con una salsa de tu elección. </p>
+        <p>1.20€</p>
+        <div class="cantidad">
+            <button class="menos" onclick="cambiarCantidad('TEQUEÑOS', -1)"><i class="fas fa-minus"></i></button>
+            <span id="cantidad-TEQUEÑOS">0</span>
+            <button class="mas" onclick="cambiarCantidad('TEQUEÑOS', 1)"><i class="fas fa-plus"></i></button>
+        </div>
+        <button class="añadir" onclick="añadirProducto('TEQUEÑOS', 1.20)">AÑADIR</button>
+    </div>
+</div>
+
+<div class="productos-container">
+    <!-- Segunda fila de productos -->
+    <div class="producto">
+        <img src="imagenes entrantes/alitas.png" alt="alitas">
+        <p style="font-weight: bold;">Alitas de pollo</p>
+        <p>Crujientes por fuera, tiernas por dentro y cubiertas con una variedad de salsas 
+            para satisfacer todos los gustos</p>
+        <p>2.00€</p>
+        <div class="cantidad">
+            <button class="menos" onclick="cambiarCantidad('ALITAS DE POLLO', -1)"><i class="fas fa-minus"></i></button>
+            <span id="cantidad-ALITAS DE POLLO">0</span>
+            <button class="mas" onclick="cambiarCantidad('ALITAS DE POLLO', 1)"><i class="fas fa-plus"></i></button>
+        </div>
+        <button class="añadir" onclick="añadirProducto('ALITAS DE POLLO', 2.00)">AÑADIR</button>
+    </div>
+
+    <div class="producto">
+        <img src="imagenes entrantes/aros cebolla.png" alt="aros_cebolla">
+        <p style="font-weight: bold;">Aros de cebolla</p>
+        <p>Rodajas de cebolla dulce y tierna, recubiertas con una capa de masa dorada y 
+            fritas hasta alcanzar la perfección. </p>
+        <p>2.50€</p>
+        <div class="cantidad">
+            <button class="menos" onclick="cambiarCantidad('AROS DE CEBOLLA', -1)"><i class="fas fa-minus"></i></button>
+            <span id="cantidad-AROS DE CEBOLLA">0</span>
+            <button class="mas" onclick="cambiarCantidad('AROS DE CEBOLLA', 1)"><i class="fas fa-plus"></i></button>
+        </div>
+        <button class="añadir" onclick="añadirProducto('AROS DE CEBOLLA', 2.50)">AÑADIR</button>
+    </div>
+
+    <div class="producto">
+        <img src="imagenes entrantes/nuggets.png" alt="nuggets">
+        <p style="font-weight: bold;">Nuggets de pollo</p>
+        <p>Elaborados con jugosa carne de pollo y una deliciosa mezcla de especias, son ideales 
+            como aperitivo </p>
+        <p>1.20€</p>
+        <div class="cantidad">
+            <button class="menos" onclick="cambiarCantidad('NUGGETS', -1)"><i class="fas fa-minus"></i></button>
+            <span id="cantidad-NUGGETS">0</span>
+            <button class="mas" onclick="cambiarCantidad('NUGGETS', 1)"><i class="fas fa-plus"></i></button>
+        </div>
+        <button class="añadir" onclick="añadirProducto('NUGGETS', 1.20)">AÑADIR</button>
+    </div>
+</div>
+
+<!-- Ventana emergente del carrito -->
 <div id="modalCarrito" class="ventana-emergente">
     <div class="contenido-ventana">
         <span class="cerrar" onclick="cerrarModalCarrito()">&times;</span>
-        <h2>Tu Pedido</h2>
+        <h2 class="h2-texto">TU PEDIDO</h2>
         <div id="contenidoCarrito"></div>
         <p id="precioTotal"></p>
     </div>
@@ -1088,8 +1312,10 @@ footer {
 <div id="modalConfirmacion" class="ventana-confirmacion">
     <p id="mensajeConfirmacion"></p>
 </div>
-  <!-- FOOOTER -->
-  <footer>
+
+</div>
+ <!-- FOOOTER -->
+ <footer>
     <div class="footer-container">
         <div class="footer-section">
             <h3>FFOOD</h3>

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>FFOOD</title>
-    <script>
-        // Función para abrir el modal de inicio de sesión
+    <title>CONTACTO - FFOOD</title>
+    <script> //ABRIR MODAL
+    // Función para abrir el modal de inicio de sesión
     function openLoginModal() {
         var modal = document.getElementById('loginModal');
         modal.style.display = 'block';
@@ -63,8 +63,8 @@
         });
     });
 
-    // Obtener parámetro de la URL
-    function getQueryStringParameter(name) {
+ // Obtener parámetro de la URL
+ function getQueryStringParameter(name) {
             name = name.replace(/[\[\]]/g, "\\$&");
             let url = window.location.href;
             let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
@@ -147,6 +147,7 @@
     });
 });
 
+    
    // PRODUCTOS Y CARRITO //
 let carrito = {};
 
@@ -294,37 +295,39 @@ window.onload = function() {
     font-size: 1.2rem
 }
 
-       /* ESTILOS FUENTE */
-       @font-face {
+/* ESTILOS FUENTE */
+@font-face {
     font-family:Insanibu;
     src: url(fonts/Insanibu.ttf);
 }
 
-@font-face {
+    @font-face {
     font-family:Montserrat;
     src: url(fonts/Montserrat-VariableFont_wght.ttf);
 }
 
-       /* Estilos generales */
-       * {
+
+ /* Reset básico para márgenes y rellenos */
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 /* Asegurar que el HTML y el body ocupen toda la altura del viewport */
 html, body {
-    height: 100%;
+    height: 101%;
 }
-       
+
+/* Configurar el body como un contenedor flex con dirección de columna */
 body {
     display: flex;
     flex-direction: column;
 }
 
 h1 {
-    color: rgba(255,204,0); /* Cambia el color del texto de h1 a amarillo */
+    color: yellow; /* Cambia el color del texto de h1 a amarillo */
     text-align: center; /* Centra el texto de h1 */
-    margin-top: 50px;
 }
 
 /* Contenedor principal */
@@ -441,6 +444,10 @@ h1 {
     margin-left: -10px; /* Aplica un margen izquierdo de -10px */
 }
 
+#cambiar-color{
+    color:rgba(255,204,0)
+}
+
 /* Segundo header */
 .secondary-header {
     background-image: url('img fondo,header e inicio/fuego.gif'); /* Establece una imagen de fondo animada */
@@ -454,6 +461,7 @@ h1 {
     align-items: center; /* Centra los elementos verticalmente */
     font-size: 23px; /* Establece el tamaño de fuente a 23px */
     font-family:Insanibu;
+
 }
 
 .secondary-header .logo {
@@ -495,7 +503,7 @@ h1 {
 /* Color para hiperenlaces */
 .primary-header a:hover,
 .secondary-header a:hover {
-    color: yellow; /* Cambia el color del texto a amarillo cuando se pasa el ratón por encima */
+    color: rgba(255,204,0) /* Cambia el color del texto a amarillo cuando se pasa el ratón por encima */
 }
 
 
@@ -575,8 +583,9 @@ h1 {
     border-radius: 10px; /* Bordes redondeados */
 }
 
-.centrar h2{
+.modal-h2{
     text-align: center;
+    margin-bottom: 10px;
 }
 
 /* Estilo para el botón de cierre */
@@ -674,69 +683,122 @@ input[type="checkbox"] {
     align-items: center; /* Centra verticalmente si el contenedor tiene altura definida */
 }
 
-.modal-h2{
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-/* RESTAURANTES */
-.nuestros {
-    color: rgba(255,204,0)
-    
-}
- 
-/*GALERÍA DE IMÁGENES */   
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 75%;
-    margin-inline: auto;
-    margin-top: 30px;
-}
-
-.image-gallery img {
-    width: 100%;
-    object-fit: cover;
-    transition: transform 350ms ease, opacity 350ms linear;
-    filter: grayscale(15%);
-}
-
-.image-gallery:hover img:not(:hover) {
-    transform: scale(0.8);
-    opacity: 0.6;
-}
-
-.image-container {
+/*Estilos del carrusel */
+.carousel-container {
+    width: 60%; /* Puedes ajustar este valor según sea necesario */
+    overflow: hidden; /* Asegúrate de que el overflow esté oculto */
     position: relative;
-    display: inline-block;
+    margin: 20px auto; /* Centra horizontalmente el carrusel */
+    display: flex;
+    justify-content: center; /* Centra el contenido dentro del contenedor */
+    align-items: center; /* Alinea verticalmente en el centro */
 }
 
-.hover-text {
+.carousel {
+    display: flex;
+    animation: scroll 10s linear infinite;
+    gap: 50px; /* Añade espacio entre las imágenes */
+}
+
+.carousel img {
+    flex-shrink: 0;
+    height: 75px; /* Ajusta la altura según el ancho */
+    width: 75px; /* Ajusta el ancho de cada imagen a un tamaño más pequeño */
+}
+
+.prev, .next {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
+    transform: translateY(-50%);
+    background-color: rgba(255,204,0);
+    color: black;
+    border: none;
     padding: 10px;
-    border-radius: 5px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    text-decoration: none;
+    cursor: pointer;
+    z-index: 1;
+    font-size: large;
 }
 
-.image-container:hover .hover-text {
-    opacity: 1;
+.prev {
+    left: 15px; /* Ajusta este valor para estirar más hacia la izquierda */
 }
 
-.image-container:hover img {
-    transform: scale(1);
-    opacity: 1;
+.next {
+    right: 15px; /* Ajusta este valor para estirar más hacia la derecha */
 }
 
-.hover-text:hover {
-    color: rgba(255,204,0)
-}
+ /* Animación de desplazamiento del carrusel */
+ @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-20%); /* Desplazamiento completo hacia la izquierda */
+            }
+        }
+
+/* ESTILOS FORMULARIO*/
+.contact {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+.formulario .form {
+            background: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255,204,0, 0.5);
+        }
+
+        .formulario .form .form-header .form-title {
+            text-align: center;
+            padding: 14px;
+            font-size: 2em;
+            color:rgba(255,204,0);
+        }
+
+        .formulario .form .form-label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color:rgba(255,204,0);
+        }
+
+        .formulario .form .form-input, .form-textarea {
+            border: none;
+            outline: none;
+            border-bottom: 2px solid rgba(255,204,0);
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+            font-size: 14px;
+            color: #ffffff;
+            background: transparent;
+            box-sizing: border-box; /* Incluye padding y border en el ancho total */
+            resize: none;
+        }
+
+        .formulario .form .btn {
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            border: none;
+            color: white;
+            background-color: rgba(255,204,0);
+            padding: 15px;
+            border-radius: 2px;
+        }
+
+        .formulario .form .btn:hover {
+            background-color: #cc9900;
+        }
+
+
 
 /* Ventana emergente del carrito */
 .ventana-emergente {
@@ -850,6 +912,7 @@ input[type="checkbox"] {
         cursor: pointer;
     }
 
+
 /* ESTILOS FOOTER*/
 footer {
     background-color: #222;
@@ -857,7 +920,6 @@ footer {
     padding: 20px 0;
     text-align: center;
     margin-top: auto; /* Hace que el footer se quede pegado en la parte inferior */
- 
 }
 
 .footer-container {
@@ -898,11 +960,12 @@ footer {
     width: 40px;
     height: 40px;
 }
+
 </style>
 </head>
 
-<body>   
-<!-- Modal de mensaje de error -->
+<body>
+    <!-- Modal de mensaje de error -->
 <div id="errorModal" class="modal">
     <div class="modal-content">
         <p id="errorMensaje"></p>
@@ -926,18 +989,18 @@ footer {
         <form>
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" autocomplete="email" required="">
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <div class="form-group">
+                <a href="#" id="openForgotPasswordModal">¿Olvidaste tu contraseña?</a>
+            </div>
             <div class="form-group checkbox-group">
                 <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Recordarme</label>
-            </div>
-            <div class="form-group">
-                <a href="#" id="openForgotPasswordModal">¿Olvidaste tu contraseña?</a>
             </div>
             <div class="btn-container">
                 <button id="btnLogin" class="btn" onclick="submitLoginForm()">Iniciar sesión</button> 
@@ -993,15 +1056,12 @@ footer {
                         </ul>
                     </ul>
                 </nav>
-                
                 <div class="icono-carrito" onclick="mostrarModalCarrito()">
                     <a href="#"><img src="img fondo,header e inicio/icono carrito.png" alt="Carrito de Compras"></a>
                     <!-- Contador de artículos en el carrito -->
                     <div id="contador-carrito" class="count-carrito">0</div>
                 </div>
-                <!-- Botón para abrir el modal de inicio de sesión -->
                 <a href="#" class="icono-usuario" onclick="openLoginModal()"><img src="img fondo,header e inicio/icono usuario.png" alt="Usuario" style="width: 50px; height: auto;"></a>
-
             </header>
             <!-- Segundo header -->
             <header class="secondary-header">
@@ -1029,56 +1089,34 @@ footer {
             </header>
         </div>
     </div>
-
-    
-    <!-- RESTAURANTES -->
-    <h1>NUESTROS RESTAURANTES</h1>
-
-    <!-- GALERÍA IMÁGENES    -->
-    <div class="image-gallery">
-        <div class="image-container">
-            <img src="imagen index/restaurante3.jpeg.jpeg" alt="Foto Restaurante Barcelona">
-            <a href="https://maps.app.goo.gl/ki7kY9k6a6qqDCi29" target="_blank" class="hover-text">Ir Restaurante Barcelona Rambla</a>
+    <section class="contact">
+        <div class="formulario">
+            <form action="" class="form">
+                <div class="form-header">
+                <h1 class="form-title">Contacto</h1>
+                </div>
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" id="nombre" class="form-input" placeholder="Escriba su nombre">
+                
+                <label for="direccion" class="form-label">Dirección:</label>
+                <input type="text" id="direccion" class="form-input" placeholder="Escriba su dirección">
+                
+                <label for="correo" class="form-label">Correo Electrónico:</label>
+                <input type="email" id="correo" class="form-input" placeholder="Escriba su correo">
+                
+                <label for="mensaje" class="form-label">Mensaje:</label>
+                <textarea id="mensaje" class="form-textarea" placeholder="Escriba aquí su mensaje"></textarea>
+                
+                <input type="submit" class="btn" value="Enviar Consulta">
+            </form>
         </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante5.jpeg" alt="Foto Restaurante Manga">
-            <a href="https://maps.app.goo.gl/ZCDUm3QRSN4DV9c57" target="_blank" class="hover-text">Ir Restaurante La Manga</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante6.jpeg" alt="Foto Restaurante Valencia">
-            <a href="https://maps.app.goo.gl/WrXhyyFiRs9NNj3a6" target="_blank" class="hover-text">Ir Restaurante Valencia</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante7.jpeg" alt="Foto Restaurante Barcelona">
-            <a href="https://maps.app.goo.gl/XNKw7sQuH5fHVYMU9" target="_blank" class="hover-text">Ir Restaurante Sagrada Familia</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante9.jpeg" alt="Foto Restaurante Bilbao">
-            <a href="https://maps.app.goo.gl/YoRRiF1qXt1wsMjE8" target="_blank" class="hover-text">Ir Restaurante Bilbao</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante11.jpeg" alt="Foto Restaurante Nueva York">
-            <a href="https://maps.app.goo.gl/i7BFQcKrb7B9vVPp8" target="_blank" class="hover-text">Ir Restaurante Central Park</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante12.jpeg" alt="Foto Restaurante Tokyo">
-            <a href="https://maps.app.goo.gl/c59FNhSoy3bJnuiS9" target="_blank" class="hover-text">Ir Restaurante Tokyo</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante14.jpeg" alt="Foto Restaurante Europa">
-            <a href="https://www.google.es/maps/space/europa/@27.4314532,151.4288514,11343686m/data=!3m1!1e3?hl=es&entry=ttu" target="_blank" class="hover-text">Ir Restaurante Europa</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante15.jpeg" alt="Foto Restaurante Calisto">
-            <a href="https://www.google.es/maps/space/callisto/@-8.9766055,117.6494786,13503295m/data=!3m1!1e3?hl=es&entry=ttu" target="_blank" class="hover-text">Ir Restaurante Calisto</a>
-        </div>  
-    </div>
+    </section>
 
     <!-- Ventana emergente del carrito -->
 <div id="modalCarrito" class="ventana-emergente">
     <div class="contenido-ventana">
         <span class="cerrar" onclick="cerrarModalCarrito()">&times;</span>
-        <h2>Tu Pedido</h2>
+        <h2 class="h2-texto">TU PEDIDO</h2>
         <div id="contenidoCarrito"></div>
         <p id="precioTotal"></p>
     </div>
@@ -1088,8 +1126,9 @@ footer {
 <div id="modalConfirmacion" class="ventana-confirmacion">
     <p id="mensajeConfirmacion"></p>
 </div>
-  <!-- FOOOTER -->
-  <footer>
+
+ <!-- FOOOTER -->
+ <footer>
     <div class="footer-container">
         <div class="footer-section">
             <h3>FFOOD</h3>

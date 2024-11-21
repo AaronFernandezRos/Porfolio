@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>FFOOD</title>
-    <script>
-        // Función para abrir el modal de inicio de sesión
+    <title>ACERCA DE NOSOTROS - FFOOD</title>
+    <script> 
+    //ABRIR MODAL
+    // Función para abrir el modal de inicio de sesión
     function openLoginModal() {
         var modal = document.getElementById('loginModal');
         modal.style.display = 'block';
@@ -61,10 +62,25 @@
                 message.textContent = ""; // Limpiar el mensaje de error si las contraseñas coinciden
             }
         });
+        
+        // Script para el acordeón
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+            for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        }
     });
 
-    // Obtener parámetro de la URL
-    function getQueryStringParameter(name) {
+     // Obtener parámetro de la URL
+     function getQueryStringParameter(name) {
             name = name.replace(/[\[\]]/g, "\\$&");
             let url = window.location.href;
             let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
@@ -147,7 +163,7 @@
     });
 });
 
-   // PRODUCTOS Y CARRITO //
+// PRODUCTOS Y CARRITO //
 let carrito = {};
 
 function cambiarCantidad(producto, cantidad) {
@@ -247,7 +263,7 @@ window.onload = function() {
 </script>
 <style>
 
-/* Estilos para el modal de mensaje de error y bienvenida */
+    /* Estilos para el modal de mensaje de error y bienvenida */
 #errorModal, #welcomeModal {
     display: none;
     position: fixed;
@@ -293,7 +309,8 @@ window.onload = function() {
     text-align: center;
     font-size: 1.2rem
 }
-
+       /* Estilos generales */
+       
        /* ESTILOS FUENTE */
        @font-face {
     font-family:Insanibu;
@@ -305,26 +322,23 @@ window.onload = function() {
     src: url(fonts/Montserrat-VariableFont_wght.ttf);
 }
 
-       /* Estilos generales */
-       * {
+       
+/* Reset básico para márgenes y rellenos */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 /* Asegurar que el HTML y el body ocupen toda la altura del viewport */
 html, body {
-    height: 100%;
+    height: 101%;
 }
-       
+
+/* Configurar el body como un contenedor flex con dirección de columna */
 body {
     display: flex;
     flex-direction: column;
-}
-
-h1 {
-    color: rgba(255,204,0); /* Cambia el color del texto de h1 a amarillo */
-    text-align: center; /* Centra el texto de h1 */
-    margin-top: 50px;
 }
 
 /* Contenedor principal */
@@ -333,6 +347,7 @@ h1 {
     flex-direction: column; /* Coloca los elementos en una columna */
     align-items: center; /* Centra los elementos horizontalmente */
 }
+
 
 /* Contenedor del fondo */
 .background-container {
@@ -441,6 +456,10 @@ h1 {
     margin-left: -10px; /* Aplica un margen izquierdo de -10px */
 }
 
+#cambiar-color {
+    color: rgba(255,204,0) /* Cambia el color del texto a amarillo */
+}
+
 /* Segundo header */
 .secondary-header {
     background-image: url('img fondo,header e inicio/fuego.gif'); /* Establece una imagen de fondo animada */
@@ -454,6 +473,7 @@ h1 {
     align-items: center; /* Centra los elementos verticalmente */
     font-size: 23px; /* Establece el tamaño de fuente a 23px */
     font-family:Insanibu;
+
 }
 
 .secondary-header .logo {
@@ -495,7 +515,7 @@ h1 {
 /* Color para hiperenlaces */
 .primary-header a:hover,
 .secondary-header a:hover {
-    color: yellow; /* Cambia el color del texto a amarillo cuando se pasa el ratón por encima */
+    color: rgba(255,204,0) /* Cambia el color del texto a amarillo cuando se pasa el ratón por encima */
 }
 
 
@@ -574,9 +594,9 @@ h1 {
     z-index: -1; /* Coloca la imagen detrás del contenido */
     border-radius: 10px; /* Bordes redondeados */
 }
-
-.centrar h2{
+.modal-h2{
     text-align: center;
+    margin-bottom: 10px;
 }
 
 /* Estilo para el botón de cierre */
@@ -674,68 +694,59 @@ input[type="checkbox"] {
     align-items: center; /* Centra verticalmente si el contenedor tiene altura definida */
 }
 
-.modal-h2{
-    text-align: center;
-    margin-bottom: 10px;
+/*Estilo cuadro  sobre acerca de nosotros */
+.about-section {
+    background-color: rgba(255,204,0, 0.8); /* Fondo oscuro para la sección */
+    padding: 20px;
+    width: 60%;
+    margin: 20px auto 100px; /* Centrado con margen y espacio inferior para el footer */
+    border-radius: 10px;
 }
 
-/* RESTAURANTES */
-.nuestros {
-    color: rgba(255,204,0)
-    
-}
- 
-/*GALERÍA DE IMÁGENES */   
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 75%;
-    margin-inline: auto;
-    margin-top: 30px;
-}
-
-.image-gallery img {
+.accordion {
+    cursor: pointer;
+    padding: 18px;
     width: 100%;
-    object-fit: cover;
-    transition: transform 350ms ease, opacity 350ms linear;
-    filter: grayscale(15%);
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    border-bottom: 1px solid rgba(255,204,0); /* Línea divisoria */
+    background-color: rgba(51, 51, 51);
+    color: rgba(255,204,0);
+    font-size: 1.3rem;
+    border-radius: 10px; /* Bordes redondeados inferiores */
+} 
+
+.active, .accordion:hover {
+    background-color: rgb(92, 87, 87); /* Fondo al activar/hover */
 }
 
-.image-gallery:hover img:not(:hover) {
-    transform: scale(0.8);
-    opacity: 0.6;
-}
-
-.image-container {
-    position: relative;
-    display: inline-block;
-}
-
-.hover-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.panel {
+    padding: 0 18px;
+    background-color: rgba(51, 51, 51);
     color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    text-decoration: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.2s ease-out;
+    border-radius: 0 0 10px 10px; /* Bordes redondeados inferiores */
+    margin: 2px;
 }
 
-.image-container:hover .hover-text {
-    opacity: 1;
+.p{
+    font-size: 1.2rem;
+    margin-top: 10px;
 }
 
-.image-container:hover img {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.hover-text:hover {
-    color: rgba(255,204,0)
+.nosotros{
+    width: auto;
+    height: 400px;
+    border-radius: 10px;
+    border: solid 2px rgba(255,204,0);
+    display:block;
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Ventana emergente del carrito */
@@ -854,10 +865,9 @@ input[type="checkbox"] {
 footer {
     background-color: #222;
     color: #fff;
-    padding: 20px 0;
+    padding: 40px 0;
     text-align: center;
     margin-top: auto; /* Hace que el footer se quede pegado en la parte inferior */
- 
 }
 
 .footer-container {
@@ -898,11 +908,15 @@ footer {
     width: 40px;
     height: 40px;
 }
+
+
 </style>
 </head>
 
-<body>   
-<!-- Modal de mensaje de error -->
+<body>
+
+
+    <!-- Modal de mensaje de error -->
 <div id="errorModal" class="modal">
     <div class="modal-content">
         <p id="errorMensaje"></p>
@@ -915,7 +929,6 @@ footer {
         <p id="welcomeMensaje"></p>
     </div>
 </div>
-
     <!-- Modal de Inicio de Sesión -->
 <div id="loginModal" class="modal">
     <div class="modal-content">
@@ -926,18 +939,18 @@ footer {
         <form>
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" autocomplete="email" required="">
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <div class="form-group">
+                <a href="#" id="openForgotPasswordModal">¿Olvidaste tu contraseña?</a>
+            </div>
             <div class="form-group checkbox-group">
                 <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Recordarme</label>
-            </div>
-            <div class="form-group">
-                <a href="#" id="openForgotPasswordModal">¿Olvidaste tu contraseña?</a>
             </div>
             <div class="btn-container">
                 <button id="btnLogin" class="btn" onclick="submitLoginForm()">Iniciar sesión</button> 
@@ -993,15 +1006,12 @@ footer {
                         </ul>
                     </ul>
                 </nav>
-                
                 <div class="icono-carrito" onclick="mostrarModalCarrito()">
                     <a href="#"><img src="img fondo,header e inicio/icono carrito.png" alt="Carrito de Compras"></a>
                     <!-- Contador de artículos en el carrito -->
                     <div id="contador-carrito" class="count-carrito">0</div>
                 </div>
-                <!-- Botón para abrir el modal de inicio de sesión -->
                 <a href="#" class="icono-usuario" onclick="openLoginModal()"><img src="img fondo,header e inicio/icono usuario.png" alt="Usuario" style="width: 50px; height: auto;"></a>
-
             </header>
             <!-- Segundo header -->
             <header class="secondary-header">
@@ -1029,56 +1039,76 @@ footer {
             </header>
         </div>
     </div>
-
     
-    <!-- RESTAURANTES -->
-    <h1>NUESTROS RESTAURANTES</h1>
+<!-- Contenedor cuadro acerca de nosotros-->
+<div class="about-section">
+    <button class="accordion">Historia del Restaurante</button>
+    <div class="panel">
+        <p class="p">FFOOD fue fundado en 2010 con nuestra visión de ofrecer comida rápida de alta calidad en un ambiente amigable y accesible. La inspiración para abrir 
+            el restaurante vino de nuestra pasión por la gastronomía. Nosotros, los buenos amigos Aarón, Dabid y Guillermo, crecimos en una familia de chefs y hemos trabajado en 
+            la industria de la restauración durante más de 15 años. Desde nuestra infancia, estuvimos expuestos a la diversidad culinaria, lo que nos inspiró a crear un lugar
+            donde se pudiera disfrutar de una mezcla de pizzas, kebabs, hamburguesas, entrantes y postres, todo bajo un mismo techo.</p> 
+           
+           <p class="p"> Desde su inauguración en C/Almeja Gorda, FFOOD ha evolucionado significativamente. Lo que comenzó como un pequeño local con un menú limitado, 
+            rápidamente se ganó la reputación de ofrecer comida deliciosa y accesible. Con el tiempo, el restaurante ha ampliado su menú, incorporando nuevas recetas y 
+            adaptándose a las preferencias cambiantes de sus clientes. Una anécdota interesante es que, durante el primer año, la pizza de pepperoni de FFOOD fue elegida
+            como la mejor de la ciudad en un concurso local, lo que impulsó la popularidad del restaurante.</p>
 
-    <!-- GALERÍA IMÁGENES    -->
-    <div class="image-gallery">
-        <div class="image-container">
-            <img src="imagen index/restaurante3.jpeg.jpeg" alt="Foto Restaurante Barcelona">
-            <a href="https://maps.app.goo.gl/ki7kY9k6a6qqDCi29" target="_blank" class="hover-text">Ir Restaurante Barcelona Rambla</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante5.jpeg" alt="Foto Restaurante Manga">
-            <a href="https://maps.app.goo.gl/ZCDUm3QRSN4DV9c57" target="_blank" class="hover-text">Ir Restaurante La Manga</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante6.jpeg" alt="Foto Restaurante Valencia">
-            <a href="https://maps.app.goo.gl/WrXhyyFiRs9NNj3a6" target="_blank" class="hover-text">Ir Restaurante Valencia</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante7.jpeg" alt="Foto Restaurante Barcelona">
-            <a href="https://maps.app.goo.gl/XNKw7sQuH5fHVYMU9" target="_blank" class="hover-text">Ir Restaurante Sagrada Familia</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante9.jpeg" alt="Foto Restaurante Bilbao">
-            <a href="https://maps.app.goo.gl/YoRRiF1qXt1wsMjE8" target="_blank" class="hover-text">Ir Restaurante Bilbao</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante11.jpeg" alt="Foto Restaurante Nueva York">
-            <a href="https://maps.app.goo.gl/i7BFQcKrb7B9vVPp8" target="_blank" class="hover-text">Ir Restaurante Central Park</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/Restaurante12.jpeg" alt="Foto Restaurante Tokyo">
-            <a href="https://maps.app.goo.gl/c59FNhSoy3bJnuiS9" target="_blank" class="hover-text">Ir Restaurante Tokyo</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante14.jpeg" alt="Foto Restaurante Europa">
-            <a href="https://www.google.es/maps/space/europa/@27.4314532,151.4288514,11343686m/data=!3m1!1e3?hl=es&entry=ttu" target="_blank" class="hover-text">Ir Restaurante Europa</a>
-        </div>
-        <div class="image-container">
-            <img src="imagen index/restaurante15.jpeg" alt="Foto Restaurante Calisto">
-            <a href="https://www.google.es/maps/space/callisto/@-8.9766055,117.6494786,13503295m/data=!3m1!1e3?hl=es&entry=ttu" target="_blank" class="hover-text">Ir Restaurante Calisto</a>
-        </div>  
+            
+            <img src="imagenes nosotros/historia.jpg" class="nosotros" alt="Imagen Encargados">
+           
+            
     </div>
+    <button class="accordion">Como trabajamos</button>
+    <div class="panel">
+            <p class="p">En FFOOD, la selección de ingredientes es un proceso riguroso y meticuloso. Solo utilizamos ingredientes frescos y de alta calidad, provenientes de proveedores 
+            locales de confianza. Cada ingrediente es cuidadosamente seleccionado para garantizar que cumpla con nuestros estándares de frescura y sabor.</p>
 
-    <!-- Ventana emergente del carrito -->
+            <p class="p">La preparación y presentación de los platos son esenciales para nosotros. Todos nuestros platillos son preparados a diario por un equipo de cocineros experimentados 
+            que siguen recetas específicas para asegurar la consistencia. La presentación es igualmente importante, buscamos que cada plato sea visualmente atractivo, ya que creemos 
+            que la comida entra primero por los ojos.</p>
+            
+           <p class="p">El personal de FFOOD recibe una capacitación intensiva antes de comenzar a trabajar. Esto incluye formación en servicio al cliente, manipulación de alimentos y 
+            preparación de platos. Además, realizamos capacitaciones periódicas para asegurarnos de que todos estén al día con las mejores prácticas y nuevas tendencias en la 
+            industria de la restauración.</p>
+            
+            
+            <p class="p">Para mantener la calidad y la consistencia, implementamos controles de calidad estrictos en todas las etapas de preparación y servicio. Realizamos evaluaciones 
+            regulares y solicitamos retroalimentación de nuestros clientes para identificar áreas de mejora y asegurar que cada visita a FFOOD sea una experiencia satisfactoria.</p>
+                
+            
+            <img src="imagenes nosotros/trabajadores.jpg" class="nosotros" alt="Imagen de nuestros trabajadores">
+            
+    
+    </div>
+    <button class="accordion">Valores Fundamentales</button>
+    <div class="panel">
+            <p class="p">Los valores fundamentales que guían nuestras operaciones en FFOOD son la calidad, la integridad, la innovación y la satisfacción del cliente. Creemos que cada cliente 
+            merece una experiencia excepcional, por lo que nos esforzamos por ofrecer productos de la más alta calidad y un servicio impecable.</p>            
+
+            <p class="p">Estos valores se reflejan en nuestro servicio al cliente, donde cada miembro del equipo está comprometido a brindar una atención personalizada y amable. Creemos que la 
+            clave de nuestro éxito radica en la satisfacción de nuestros clientes, por lo que hacemos todo lo posible para superar sus expectativas.</p>
+            
+            
+            <p class="p">En FFOOD, estos valores contribuyen a la experiencia culinaria de nuestros clientes al asegurar que cada plato sea una obra maestra de sabor y presentación. Nuestra 
+            dedicación a la calidad y al servicio se alinea con nuestra visión a largo plazo de convertirnos en el restaurante de comida rápida preferido en la ciudad, reconocido 
+            por nuestra pasión por la gastronomía y nuestro compromiso con la excelencia.</p>
+            
+            
+            <p class="p">En resumen, FFOOD es más que un restaurante de comida rápida; es un lugar donde la pasión por la comida se encuentra con la dedicación al servicio, creando una 
+            experiencia inolvidable para cada cliente que nos visita en C/Almeja Gorda.</p>
+
+         
+            <img src="imagenes nosotros/servicio.jpg" class="nosotros" alt="Imagen mostrando el buen trato a nuestros clientes">
+              
+    </div>
+</div>
+
+<!-- Ventana emergente del carrito -->
 <div id="modalCarrito" class="ventana-emergente">
     <div class="contenido-ventana">
         <span class="cerrar" onclick="cerrarModalCarrito()">&times;</span>
-        <h2>Tu Pedido</h2>
+        <h2 class="h2-texto">TU PEDIDO</h2>
         <div id="contenidoCarrito"></div>
         <p id="precioTotal"></p>
     </div>
@@ -1088,6 +1118,7 @@ footer {
 <div id="modalConfirmacion" class="ventana-confirmacion">
     <p id="mensajeConfirmacion"></p>
 </div>
+    
   <!-- FOOOTER -->
   <footer>
     <div class="footer-container">
