@@ -11045,3 +11045,14 @@ html {
 .copyright {
   background-color: #1a252f;
 }
+
+.button-visitar{
+  color: white; 
+  text-decoration: none;
+
+}
+
+.button-visitar:hover{
+  color: white; /* Mantiene el texto blanco */
+
+}
